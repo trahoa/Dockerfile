@@ -11,7 +11,7 @@ OpenCV 3.4.1 + opencv_contrib + Python {2,3} + Java + GUI + media/video support 
     ```
 - Create a new container and mount the current folder to `/root/OpenCV`:
 
-    `docker run --name <CONTAINER_NAME> -e DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -v $(pwd):/root/OpenCV -it thtung1/OpenCV`
+    `docker run --name <CONTAINER_NAME> -e DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -v $(pwd):/root/OpenCV -it thtung1/opencv`
 - Detach using `Ctrl+p`->`Ctrl+q`.
 - Attach to a running docker container: `docker attach --sig-proxy=false <CONTAINER_NAME>`
 - Start an existing docker container: `docker start <CONTAINER_NAME>`
