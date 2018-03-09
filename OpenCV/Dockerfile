@@ -41,7 +41,7 @@ RUN \
 # Download OpenCV 3.4.1 and install
 RUN \
     # Download OpenCV and OpenCV-contrib
-    cd ~ && \
+    cd /root && \
     mkdir opencv && \
     curl -L https://github.com/opencv/opencv/archive/3.4.1.tar.gz | tar xz -C opencv --strip-components 1 && \
     mkdir opencv_contrib && \
