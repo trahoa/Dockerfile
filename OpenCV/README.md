@@ -10,6 +10,7 @@ OpenCV 3.4.1 + opencv_contrib + Python {2,3} + Java + GUI + media/video support 
     cd ~/Documents/OpenCV
     ```
 - Create a new container and mount the current folder to `/root/OpenCV`:
+
     `docker run --name <CONTAINER_NAME> -e DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -v $(pwd):/root/OpenCV -it thtung1/OpenCV`
 - Detach using `Ctrl+p`->`Ctrl+q`.
 - Attach to a running docker container: `docker attach --sig-proxy=false <CONTAINER_NAME>`
@@ -17,7 +18,7 @@ OpenCV 3.4.1 + opencv_contrib + Python {2,3} + Java + GUI + media/video support 
 
 ## Compile an OpenCV example
 
-Follow [this instruction](https://docs.opencv.org/3.4.1/db/df5/tutorial_linux_gcc_cmake.html)
+The original instruction is [here](https://docs.opencv.org/3.4.1/db/df5/tutorial_linux_gcc_cmake.html)
 
 - write a simple code `DisplayImage.cpp`
     ```C++
@@ -62,12 +63,10 @@ Follow [this instruction](https://docs.opencv.org/3.4.1/db/df5/tutorial_linux_gc
     ```
 - Test the program `./DisplayImage whatever_image.jpg`
 
-## Ref
-
-Some useful references
+## References
 
 - [Docker Full Description Example](https://hub.docker.com/r/victorhcm/opencv/)
 - [Dockerfile format](https://github.com/victorhcm/dockerfiles/blob/master/opencv/Dockerfile)
 - [Install OpenCV script](https://github.com/milq/milq/blob/master/scripts/bash/install-opencv.sh)
-- [CMakeLists.txt](https://github.com/opencv/opencv/blob/master/samples/cpp/example_cmake/CMakeLists.txt)
+- [CMakeLists.txt from OpenCV](https://github.com/opencv/opencv/blob/master/samples/cpp/example_cmake/CMakeLists.txt)
 - [OpenCV CMake configuration file](https://github.com/opencv/opencv/blob/master/cmake/templates/OpenCVConfig.cmake.in)
