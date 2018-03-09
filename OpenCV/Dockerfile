@@ -12,7 +12,7 @@ RUN \
     apt-get update && apt-get upgrade -y && \
 
     # Build tools 
-    apt-get install -y build-essential cmake && \
+    apt-get install -y build-essential cmake curl && \
 
     # GUI
     apt-get install -y qt5-default libvtk6-dev && \
@@ -26,7 +26,7 @@ RUN \
     # Parallelism and linear algebra libraries
     apt-get install -y libtbb-dev libeigen3-dev && \
 
-    # support to HDF5 (available on OpenCV 3.1.0)
+    # support to HDF5
     apt-get install -y libhdf5-dev && \
 
     # Python
@@ -36,7 +36,7 @@ RUN \
     apt-get install -y ant default-jdk && \
 
     # Documentation:
-    sudo apt-get install -y doxygen && \
+    apt-get install -y doxygen && \
 
     # Cleanup
     apt-get autoclean && apt-get clean && \
@@ -47,13 +47,15 @@ RUN \
 RUN \
     # Download OpenCV and OpenCV-contrib
     cd ~ && \
-    mkdir OpenCV && \
-    curl -L https://github.com/opencv/opencv/archive/3.4.1.tar.gz | tar xz -C OpenCV --strip-components 1 && \
+    mkdir opencv && \
+    curl -L https://github.com/opencv/opencv/archive/3.4.1.tar.gz | tar xz -C opencv --strip-components 1 && \
     mkdir opencv_contrib && \
     curl -L https://github.com/opencv/opencv_contrib/archive/3.4.1.tar.gz | tar xz -C opencv_contrib --strip-components 1 && \
 
-    cd OpenCV && mkdir build && cd build && \
-    cmake -DWITH_QT=ON -DWITH_OPENGL=ON -DFORCE_VTK=ON -DWITH_TBB=ON -DWITH_GDAL=ON -DWITH_XINE=ON -DBUILD_EXAMPLES=ON -DENABLE_PRECOMPILED_HEADERS=OFF -DOPENCV_EXTRA_MODULES_PATH=~/opencv_contrib/modules ..
+    cd opencv && mkdir build && cd build && \
+    cmake -DWITH_QT=ON -DWITH_OPENGL=ON -DFORCE_VTK=ON -DWITH_TBB=ON -DWITH_GDAL=ON -DWITH_XINE=ON -DBUILD_EXAMPLES=ON -DENABLE_PRECOMPILED_HEADERS=OFF -DOPENCV_EXTRA_MODULES_PATH=~/opencv_contrib/modules .. && \
     make -j $(($(nproc) - 1)) && \
     make install && \
     ldconfig
+
+WORKDIR /root
