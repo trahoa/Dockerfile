@@ -50,7 +50,7 @@ RUN \
     cd opencv && mkdir build && cd build && \
     cmake -DCMAKE_BUILD_TYPE=RELEASE -DWITH_QT=ON -DWITH_OPENGL=ON -DFORCE_VTK=ON -DWITH_TBB=ON -DWITH_GDAL=ON -DWITH_XINE=ON -DBUILD_EXAMPLES=ON -DENABLE_PRECOMPILED_HEADERS=OFF -DBUILD_PERF_TESTS=OFF -DBUILD_TESTS=OFF -DOPENCV_EXTRA_MODULES_PATH=~/opencv_contrib/modules .. && \
     # Change to "make -j $(($(nproc) - 1)) && \" if you run on your PC
-    make && \
+    make -j4 && \
     make install && \
     ldconfig
 
