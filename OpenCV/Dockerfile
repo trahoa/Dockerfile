@@ -48,7 +48,7 @@ RUN \
     curl -L https://github.com/opencv/opencv_contrib/archive/3.4.1.tar.gz | tar xz -C opencv_contrib --strip-components 1 && \
 
     cd opencv && mkdir build && cd build && \
-    cmake -DWITH_QT=ON -DWITH_OPENGL=ON -DFORCE_VTK=ON -DWITH_TBB=ON -DWITH_GDAL=ON -DWITH_XINE=ON -DBUILD_EXAMPLES=ON -DENABLE_PRECOMPILED_HEADERS=OFF -DOPENCV_EXTRA_MODULES_PATH=~/opencv_contrib/modules .. && \
+    cmake -DCMAKE_BUILD_TYPE=RELEASE -DWITH_QT=ON -DWITH_OPENGL=ON -DFORCE_VTK=ON -DWITH_TBB=ON -DWITH_GDAL=ON -DWITH_XINE=ON -DBUILD_EXAMPLES=ON -DENABLE_PRECOMPILED_HEADERS=OFF -DBUILD_PERF_TESTS=OFF -DBUILD_TESTS=OFF -DOPENCV_EXTRA_MODULES_PATH=~/opencv_contrib/modules .. && \
     make && \
     make install && \
     ldconfig
