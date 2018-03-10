@@ -63,5 +63,6 @@ The original instruction is [here](https://docs.opencv.org/3.4.1/db/df5/tutorial
 - [Docker Full Description Example](https://hub.docker.com/r/victorhcm/opencv/)
 - [Dockerfile format](https://github.com/victorhcm/dockerfiles/blob/master/opencv/Dockerfile)
 - [Install OpenCV script](https://github.com/milq/milq/blob/master/scripts/bash/install-opencv.sh)
+- [Some useful OpenCV Flags](http://amritamaz.net/blog/opencv-config)
 - [CMakeLists.txt from OpenCV](https://github.com/opencv/opencv/blob/master/samples/cpp/example_cmake/CMakeLists.txt)
 - [OpenCV CMake configuration file](https://github.com/opencv/opencv/blob/master/cmake/templates/OpenCVConfig.cmake.in)
