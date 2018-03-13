@@ -37,21 +37,19 @@ RUN \
     apt-get autoclean && apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+WORKDIR /root
 
 # Download OpenCV 3.4.1 and install
 RUN \
     # Download OpenCV and OpenCV-contrib
-    cd /root && \
-    mkdir opencv && \
+    mkdir -p opencv/build && \
     curl -L https://github.com/opencv/opencv/archive/3.4.1.tar.gz | tar xz -C opencv --strip-components 1 && \
     mkdir opencv_contrib && \
     curl -L https://github.com/opencv/opencv_contrib/archive/3.4.1.tar.gz | tar xz -C opencv_contrib --strip-components 1 && \
 
-    cd opencv && mkdir build && cd build && \
-    cmake -DCMAKE_BUILD_TYPE=RELEASE -DWITH_QT=ON -DWITH_OPENGL=ON -DFORCE_VTK=ON -DWITH_TBB=ON -DWITH_GDAL=ON -DWITH_XINE=ON -DBUILD_EXAMPLES=ON -DENABLE_PRECOMPILED_HEADERS=OFF -DBUILD_PERF_TESTS=OFF -DBUILD_TESTS=OFF -DOPENCV_EXTRA_MODULES_PATH=~/opencv_contrib/modules .. && \
+    cd opencv/build && \
+    cmake -DCMAKE_BUILD_TYPE=RELEASE -DWITH_QT=ON -DWITH_OPENGL=ON -DFORCE_VTK=ON -DWITH_TBB=ON -DWITH_GDAL=ON -DWITH_XINE=ON -DBUILD_EXAMPLES=ON -DENABLE_PRECOMPILED_HEADERS=OFF -DBUILD_PERF_TESTS=OFF -DBUILD_TESTS=OFF -DOPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules/ .. && \
     # Change to "make -j $(($(nproc) - 1)) && \" if you run on your PC
-    make -j4 && \
+    make && \
     make install && \
     ldconfig
-
-WORKDIR /root
