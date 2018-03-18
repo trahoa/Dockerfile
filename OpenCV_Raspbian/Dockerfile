@@ -1,4 +1,4 @@
-FROM resin/raspberrypi3-python:3.6.4
+FROM resin/rpi-raspbian:stretch
 MAINTAINER TRAN Hoang Tung <tran-hoang.tung@usth.edu.vn>
 
 RUN [ "cross-build-start" ]
