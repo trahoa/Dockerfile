@@ -33,9 +33,19 @@ RUN echo "Dlib: ${DLIB_VERSION}" \
     && cmake $dlib_cmake_flags .. \
     && make -j $(getconf _NPROCESSORS_ONLN) \
     && make install \
-    && cp ../dlib/*.txt $LIB_PREFIX/include/dlib/ \
-    && cd /root \
-    && rm -rf /dlib \
+    && cd /root/dlib/examples \
+    && mkdir build \
+    && cmake .. \
+    && cmake --build . --config Release \
+    && cd /root/dlib/tools/imglab \
+    && mkdir build \
+    && cd build \
+    && cmake .. \
+    && cmake --build . --config Release \
+    && make install \
+    # && cp ../dlib/*.txt $LIB_PREFIX/include/dlib/ \
+    # && cd /root \
+    # && rm -rf /dlib \
     && apt-get autoclean && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
     # && apt-get purge -y --auto-remove $BUILD_DEPS \
