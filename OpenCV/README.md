@@ -3,13 +3,11 @@ OpenCV 3.4.1 + opencv_contrib + Python {2,3} + Java + GUI + media/video support 
 
 ## Usage
 
-- Enable display and make a new directory to mount to the container
+- Enable display so that container could access it
     ```bash
     xhost +
-    mkdir ~/Documents/OpenCV
-    cd ~/Documents/OpenCV
     ```
-- Create a new container and mount the current folder to `/root/OpenCV`:
+- Create a new container and mount the home directory. Replace <CONTAINER_NAME> by a name that you love.
 
     ```bash
     docker run -it --name <CONTAINER_NAME> \
