@@ -35,8 +35,10 @@ RUN echo "Dlib: ${DLIB_VERSION}" \
     && make install \
     && cd /root/dlib/examples \
     && mkdir build \
+    && cd build \
     && cmake .. \
     && cmake --build . --config Release \
+    && find . -maxdepth 1 -type f -perm -a=x -print0 | xargs -0 -I {} cp {} /usr/local/bin \
     && cd /root/dlib/tools/imglab \
     && mkdir build \
     && cd build \
