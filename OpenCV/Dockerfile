@@ -65,7 +65,7 @@ RUN \
     -DBUILD_TESTS=OFF \
     -DOPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules/" && \
     cd opencv/build && \
-    cmake opencv_cmake_flags .. && \
+    cmake $opencv_cmake_flags .. && \
     make -j $(getconf _NPROCESSORS_ONLN) && \
     make install && \
     ldconfig
