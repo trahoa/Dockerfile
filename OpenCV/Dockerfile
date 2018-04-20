@@ -1,6 +1,8 @@
 FROM ubuntu:16.04
 MAINTAINER TRAN Hoang Tung <tran-hoang.tung@usth.edu.vn>
 
+ENV OPENCV_VERSION='3.4.1'
+
 # Install dependencies
 RUN \
     # Keep Ubuntu up to date
@@ -33,23 +35,37 @@ RUN \
     # Documentation:
     apt-get install -y doxygen && \
 
+    # sudo
+    apt-get install -y sudo && \
+    
     # Cleanup
     apt-get autoclean && apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-WORKDIR /root
+WORKDIR /home
 
-# Download OpenCV 3.4.1 and install
+# Download OpenCV and install
 RUN \
     # Download OpenCV and OpenCV-contrib
     mkdir -p opencv/build && \
-    curl -L https://github.com/opencv/opencv/archive/3.4.1.tar.gz | tar xz -C opencv --strip-components 1 && \
+    curl -L https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.tar.gz | tar xz -C opencv --strip-components 1 && \
     mkdir opencv_contrib && \
-    curl -L https://github.com/opencv/opencv_contrib/archive/3.4.1.tar.gz | tar xz -C opencv_contrib --strip-components 1 && \
+    curl -L https://github.com/opencv/opencv_contrib/archive/${OPENCV_VERSION}.tar.gz | tar xz -C opencv_contrib --strip-components 1 && \
 
+    opencv_cmake_flags="-D CMAKE_BUILD_TYPE=RELEASE \
+    -D WITH_QT=ON \
+    -D WITH_OPENGL=ON \
+    -DFORCE_VTK=ON \
+    -DWITH_TBB=ON \
+    -DWITH_GDAL=ON \
+    -DWITH_XINE=ON \
+    -DBUILD_EXAMPLES=ON \
+    -DENABLE_PRECOMPILED_HEADERS=OFF \
+    -DBUILD_PERF_TESTS=OFF \
+    -DBUILD_TESTS=OFF \
+    -DOPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules/" && \
     cd opencv/build && \
-    cmake -DCMAKE_BUILD_TYPE=RELEASE -DWITH_QT=ON -DWITH_OPENGL=ON -DFORCE_VTK=ON -DWITH_TBB=ON -DWITH_GDAL=ON -DWITH_XINE=ON -DBUILD_EXAMPLES=ON -DENABLE_PRECOMPILED_HEADERS=OFF -DBUILD_PERF_TESTS=OFF -DBUILD_TESTS=OFF -DOPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules/ .. && \
-    # Change to "make -j $(($(nproc) - 1)) && \" if you run on your PC
-    make && \
+    cmake opencv_cmake_flags .. && \
+    make -j $(getconf _NPROCESSORS_ONLN) && \
     make install && \
     ldconfig
