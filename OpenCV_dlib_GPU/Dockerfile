@@ -1,4 +1,4 @@
-FROM nvidia/cuda:9.0-cudnn7-runtime
+FROM nvidia/cuda:9.0-cudnn7-devel
 MAINTAINER TRAN Hoang Tung <tran-hoang.tung@usth.edu.vn>
 
 ENV OPENCV_VERSION='3.4.1'
