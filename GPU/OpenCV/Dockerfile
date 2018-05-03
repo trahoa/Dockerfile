@@ -3,7 +3,7 @@ MAINTAINER TRAN Hoang Tung <tran-hoang.tung@usth.edu.vn>
 
 RUN opencv_cmake_flags="-D CMAKE_BUILD_TYPE=RELEASE \
     -D WITH_QT=ON \
-    -DCUDA_GENERATION=Pascal
+    -DCUDA_GENERATION=Pascal \
 #    "" -DCUDA_ARCH_BIN="6.1" -DCUDA_ARCH_PTX="6.1" \
     -D WITH_OPENGL=ON \
     -D FORCE_VTK=ON \
