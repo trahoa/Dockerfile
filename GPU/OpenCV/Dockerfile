@@ -1,18 +1,7 @@
 FROM thtung1/gpu_base
 MAINTAINER TRAN Hoang Tung <tran-hoang.tung@usth.edu.vn>
 
-ENV OPENCV_VERSION='3.4.1'
-
-# Download OpenCV and install
-RUN \
-    # Download OpenCV and OpenCV-contrib
-    mkdir -p opencv/build && \
-    curl -L https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.tar.gz | tar xz -C opencv --strip-components 1 && \
-    mkdir opencv_contrib && \
-    curl -L https://github.com/opencv/opencv_contrib/archive/${OPENCV_VERSION}.tar.gz | tar xz -C opencv_contrib --strip-components 1 && \
-
-    opencv_cmake_flags="-D CMAKE_BUILD_TYPE=RELEASE \
-    -D WITH_CUDA=ON \
+RUN opencv_cmake_flags="-D CMAKE_BUILD_TYPE=RELEASE \
     -D WITH_QT=ON \
     -D WITH_OPENGL=ON \
     -D FORCE_VTK=ON \
