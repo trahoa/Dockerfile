@@ -41,3 +41,16 @@ RUN \
     # Cleanup
     apt-get autoclean && apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+ENV OPENCV_VERSION='3.4.1' \
+    DLIB_VERSION='19.10'
+
+# Download OpenCV and install
+RUN \
+    # Download OpenCV and OpenCV-contrib
+    mkdir -p opencv/build && \
+    curl -L https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.tar.gz | tar xz -C opencv --strip-components 1 && \
+    mkdir opencv_contrib && \
+    curl -L https://github.com/opencv/opencv_contrib/archive/${OPENCV_VERSION}.tar.gz | tar xz -C opencv_contrib --strip-components 1 && \
+    mkdir -p dlib/build && \
+    curl -L https://github.com/davisking/dlib/archive/v${DLIB_VERSION}.tar.gz | tar xz -C dlib --strip-components 1
