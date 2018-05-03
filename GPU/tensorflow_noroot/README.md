@@ -1,5 +1,7 @@
 Tensorflow 1.8.0 with CUDA 9 and OpenCV 3.4.1 (compiled without CUDA support)
 
+In this image, OpenCV 3.4.1 could not be compiled with CUDA 9 because of some conflicts between CUDA-of-tensorflow and OpenCV. However, OpenCV 3.4.1 could be installed with `nvidia/cuda:9.0-cudnn7-devel-ubuntu16.04`. This needs further investigation.
+
 ## Usage
 
 ```bash
