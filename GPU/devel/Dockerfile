@@ -1,4 +1,4 @@
-FROM nvidia/cuda:9.0-cudnn7-devel
+FROM nvidia/cuda:8.0-cudnn7-devel-ubuntu16.04
 MAINTAINER TRAN Hoang Tung <tran-hoang.tung@usth.edu.vn>
 
 WORKDIR /home
