@@ -1,3 +1,5 @@
+Tensorflow 1.8.0 with CUDA 9 and OpenCV 3.4.1 (compiled without CUDA support)
+
 ## Usage
 
 ```bash
