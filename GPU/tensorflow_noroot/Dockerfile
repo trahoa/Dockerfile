@@ -7,8 +7,11 @@ ENV OPENCV_VERSION='3.4.1'
 
 # Install dependencies
 RUN \
-    # Keep Ubuntu up to date
-    apt-get update && apt-get upgrade -y && \
+    # Update Ubuntu source files
+    apt-get update && \
+    
+    # You should never upgrade!!!
+    # apt-get upgrade -y && \
 
     # Build tools
     apt-get install -y build-essential cmake curl && \
@@ -39,6 +42,9 @@ RUN \
 
     # sudo
     apt-get install -y sudo && \
+    
+    # jupyterlab to manage python easily
+    pip install jupyterlab && \
 
     # Cleanup
     apt-get autoclean && apt-get clean && \
