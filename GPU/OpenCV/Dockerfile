@@ -1,4 +1,4 @@
-FROM thtung1/gpu_base
+FROM thtung1/gpu_base:cuda8
 MAINTAINER TRAN Hoang Tung <tran-hoang.tung@usth.edu.vn>
 
 RUN cd opencv/build && \
