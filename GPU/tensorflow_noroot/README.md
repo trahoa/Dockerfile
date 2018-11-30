@@ -19,4 +19,5 @@ docker run --runtime=nvidia -it --name nlp \
 
 Inside docker, you can run jupyter with the following commands:
 > `export SHELL=/bin/bash`
+
 > `jupyter lab --ip=0.0.0.0 --no-browser`
