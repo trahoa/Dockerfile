@@ -7,8 +7,11 @@ ENV OPENCV_VERSION='3.4.4'
 
 # Install dependencies
 RUN \
-    # Keep Ubuntu up to date
-    apt-get update && apt-get upgrade -y && \
+    # Update Ubuntu source files
+    apt-get update && \
+    
+    # You should never upgrade!!!
+    # apt-get upgrade -y && \
 
     # Build tools
     apt-get install -y build-essential cmake curl && \
@@ -39,6 +42,9 @@ RUN \
 
     # sudo
     apt-get install -y sudo && \
+    
+    # jupyterlab to manage python easily
+    pip install jupyterlab && \
 
     # Cleanup
     apt-get autoclean && apt-get clean && \
@@ -54,7 +60,7 @@ RUN \
     cd opencv/build && \
     cmake -D CMAKE_BUILD_TYPE=RELEASE \
     -D WITH_QT=ON \
-    -D WITH_CUDA=ON \
+    -D WITH_CUDA=OFF \
     -D WITH_OPENGL=ON \
     -D FORCE_VTK=ON \
     -D WITH_TBB=ON \
