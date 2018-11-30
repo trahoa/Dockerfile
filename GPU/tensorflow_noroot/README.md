@@ -14,7 +14,7 @@ docker run --runtime=nvidia -it --name nlp \
       --volume="/etc/sudoers.d:/etc/sudoers.d:ro" \
       --volume="/tmp/.X11-unix:/tmp/.X11-unix" \
       -p 8888:8888 -p 6006:6006 \
-       thtung1/tensorflow_noroot:1.12.0-devel-gpu-py3
+       thtung1/tensorflow_noroot:1.12.0-devel-gpu
 ```
 
 Inside docker, you can run jupyter with the following commands:
