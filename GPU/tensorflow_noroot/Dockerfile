@@ -1,4 +1,4 @@
-FROM tensorflow/tensorflow:1.12.0-devel-gpu-py3
+FROM tensorflow/tensorflow:1.12.0-devel-gpu
 MAINTAINER TRAN Hoang Tung <tran-hoang.tung@usth.edu.vn>
 
 WORKDIR /home
