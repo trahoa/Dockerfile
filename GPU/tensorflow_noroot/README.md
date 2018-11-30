@@ -17,5 +17,6 @@ docker run --runtime=nvidia -it --name nlp \
        thtung1/tensorflow_noroot
 ```
 
-Inside docker, you can run jupyter with the following command
-> `jupyter notebook --ip=0.0.0.0`
+Inside docker, you can run jupyter with the following commands:
+> `export SHELL=/bin/bash`
+> `jupyter lab --ip=0.0.0.0 --no-browser`
