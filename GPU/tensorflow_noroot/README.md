@@ -1,4 +1,4 @@
-# Tensorflow 1.12.0 with CUDA 9 and OpenCV 3.4.4 (compiled without CUDA support)
+# Tensorflow 1.12.0 with CUDA 9 and OpenCV 3.4.4
 
 ## Usage
 
