@@ -1,5 +1,5 @@
-# OpenCV 3.4.1 for Ubuntu 16.04
-OpenCV 3.4.1 + opencv_contrib + Python {2,3} + Java + GUI + media/video support + HDF5
+# OpenCV 3.4.4 for Ubuntu 16.04
+OpenCV 3.4.4 + opencv_contrib + Python {2,3} + Java + GUI + media/video support + HDF5
 
 ## Usage
 
@@ -26,7 +26,7 @@ OpenCV 3.4.1 + opencv_contrib + Python {2,3} + Java + GUI + media/video support 
 
 ## Compile an OpenCV example
 
-The original instruction is [here](https://docs.opencv.org/3.4.1/db/df5/tutorial_linux_gcc_cmake.html)
+The original instruction is [here](https://docs.opencv.org/3.4.4/db/df5/tutorial_linux_gcc_cmake.html)
 
 - write a simple code `DisplayImage.cpp`
     ```C++

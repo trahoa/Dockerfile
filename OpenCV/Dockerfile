@@ -1,7 +1,7 @@
 FROM ubuntu:16.04
 MAINTAINER TRAN Hoang Tung <tran-hoang.tung@usth.edu.vn>
 
-ENV OPENCV_VERSION='3.4.1'
+ENV OPENCV_VERSION='3.4.4'
 
 # Install dependencies
 RUN \
@@ -53,6 +53,7 @@ RUN \
     curl -L https://github.com/opencv/opencv_contrib/archive/${OPENCV_VERSION}.tar.gz | tar xz -C opencv_contrib --strip-components 1 && \
 
     opencv_cmake_flags="-D CMAKE_BUILD_TYPE=RELEASE \
+    -D ENABLE_CXX11=ON -D WITH_INF_ENGINE=ON \ # Enable OpenVino
     -D WITH_QT=ON \
     -D WITH_OPENGL=ON \
     -D FORCE_VTK=ON \
