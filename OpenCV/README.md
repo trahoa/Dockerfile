@@ -1,5 +1,5 @@
-# OpenCV 3.4.4 for Ubuntu 16.04
-OpenCV 3.4.4 + opencv_contrib + Python {2,3} + Java + GUI + media/video support + HDF5
+# OpenCV 4.0.0 for Ubuntu 16.04
+OpenCV 4.0.0 + opencv_contrib + Python {2,3} + Java + GUI + media/video support + HDF5
 
 ## Usage
 
@@ -18,7 +18,7 @@ OpenCV 3.4.4 + opencv_contrib + Python {2,3} + Java + GUI + media/video support 
         --volume="/etc/shadow:/etc/shadow:ro" \
         --volume="/etc/sudoers.d:/etc/sudoers.d:ro" \
         --volume="/tmp/.X11-unix:/tmp/.X11-unix" \
-        thtung1/opencv
+        thtung1/opencv:4.0.0
     ```
 - Detach using `Ctrl+p`->`Ctrl+q`.
 - Attach to a running docker container: `docker attach --sig-proxy=false <CONTAINER_NAME>`
@@ -26,7 +26,7 @@ OpenCV 3.4.4 + opencv_contrib + Python {2,3} + Java + GUI + media/video support 
 
 ## Compile an OpenCV example
 
-The original instruction is [here](https://docs.opencv.org/3.4.4/db/df5/tutorial_linux_gcc_cmake.html)
+The original instruction is [here](https://docs.opencv.org/4.0.0/db/df5/tutorial_linux_gcc_cmake.html)
 
 - write a simple code `DisplayImage.cpp`
     ```C++

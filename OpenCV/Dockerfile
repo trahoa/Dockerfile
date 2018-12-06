@@ -1,7 +1,7 @@
 FROM ubuntu:16.04
 MAINTAINER TRAN Hoang Tung <tran-hoang.tung@usth.edu.vn>
 
-ENV OPENCV_VERSION='3.4.4'
+ENV OPENCV_VERSION='4.0.0'
 
 # Install dependencies
 RUN \
