@@ -52,8 +52,9 @@ RUN \
     mkdir opencv_contrib && \
     curl -L https://github.com/opencv/opencv_contrib/archive/${OPENCV_VERSION}.tar.gz | tar xz -C opencv_contrib --strip-components 1 && \
 
+    # Enable OpenVino: -D ENABLE_CXX11=ON -D WITH_INF_ENGINE=ON
     opencv_cmake_flags="-D CMAKE_BUILD_TYPE=RELEASE \
-    -D ENABLE_CXX11=ON -D WITH_INF_ENGINE=ON \ # Enable OpenVino
+    -D ENABLE_CXX11=ON -D WITH_INF_ENGINE=ON \
     -D WITH_QT=ON \
     -D WITH_OPENGL=ON \
     -D FORCE_VTK=ON \
