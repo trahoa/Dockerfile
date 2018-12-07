@@ -1,14 +1,19 @@
 FROM ubuntu:16.04
 MAINTAINER TRAN Hoang Tung <tran-hoang.tung@usth.edu.vn>
 
+WORKDIR /home
+
 ENV OPENCV_VERSION='3.4.4'
 
 # Install dependencies
 RUN \
-    # Keep Ubuntu up to date
-    apt-get update && apt-get upgrade -y && \
+    # Update Ubuntu source files
+    apt-get update && \
+    
+    # You should never upgrade!!!
+    # apt-get upgrade -y && \
 
-    # Build tools 
+    # Build tools
     apt-get install -y build-essential cmake curl && \
 
     # GUI
@@ -38,11 +43,12 @@ RUN \
     # sudo
     apt-get install -y sudo && \
     
+    # jupyterlab to manage python easily
+    pip install jupyterlab && \
+
     # Cleanup
     apt-get autoclean && apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-WORKDIR /home
 
 # Download OpenCV and install
 RUN \
@@ -51,23 +57,21 @@ RUN \
     curl -L https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.tar.gz | tar xz -C opencv --strip-components 1 && \
     mkdir opencv_contrib && \
     curl -L https://github.com/opencv/opencv_contrib/archive/${OPENCV_VERSION}.tar.gz | tar xz -C opencv_contrib --strip-components 1 && \
-
-    # Enable OpenVino: -D ENABLE_CXX11=ON -D WITH_INF_ENGINE=ON
-    opencv_cmake_flags="-D CMAKE_BUILD_TYPE=RELEASE \
+    cd opencv/build && \
+    cmake -D CMAKE_BUILD_TYPE=RELEASE \
     -D ENABLE_CXX11=ON -D WITH_INF_ENGINE=ON \
     -D WITH_QT=ON \
+    -D WITH_CUDA=OFF \
     -D WITH_OPENGL=ON \
     -D FORCE_VTK=ON \
     -D WITH_TBB=ON \
     -D WITH_GDAL=ON \
     -D WITH_XINE=ON \
-    -D BUILD_EXAMPLES=ON \
+    -D BUILD_EXAMPLES=OFF \
     -D ENABLE_PRECOMPILED_HEADERS=OFF \
     -D BUILD_PERF_TESTS=OFF \
     -D BUILD_TESTS=OFF \
-    -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules/" && \
-    cd opencv/build && \
-    cmake $opencv_cmake_flags .. && \
+    -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules/ .. && \
     make -j $(getconf _NPROCESSORS_ONLN) && \
     make install && \
     ldconfig
