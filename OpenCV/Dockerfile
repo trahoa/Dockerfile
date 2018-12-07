@@ -6,7 +6,9 @@ ENV OPENCV_VERSION='4.0.0'
 # Install dependencies
 RUN \
     # Keep Ubuntu up to date
-    apt-get update && apt-get upgrade -y && \
+    apt-get update && \
+    
+    # apt-get upgrade -y && \
 
     # Build tools 
     apt-get install -y build-essential cmake curl && \
@@ -54,7 +56,6 @@ RUN \
 
     # Enable OpenVino: -D ENABLE_CXX11=ON -D WITH_INF_ENGINE=ON
     opencv_cmake_flags="-D CMAKE_BUILD_TYPE=RELEASE \
-    -D ENABLE_CXX11=ON -D WITH_INF_ENGINE=ON \
     -D WITH_QT=ON \
     -D WITH_OPENGL=ON \
     -D FORCE_VTK=ON \
