@@ -42,9 +42,6 @@ RUN \
 
     # sudo
     apt-get install -y sudo && \
-    
-    # jupyterlab to manage python easily
-    pip install jupyterlab && \
 
     # Cleanup
     apt-get autoclean && apt-get clean && \
