@@ -56,7 +56,8 @@ RUN \
 
     # Enable OpenVino: -D ENABLE_CXX11=ON -D WITH_INF_ENGINE=ON
     opencv_cmake_flags="-D CMAKE_BUILD_TYPE=RELEASE \
-    -D WITH_QT=ON \
+    -D ENABLE_CXX11=ON -D WITH_INF_ENGINE=ON \
+    -D WITH_QT=OFF \
     -D WITH_OPENGL=ON \
     -D FORCE_VTK=ON \
     -D WITH_TBB=ON \
