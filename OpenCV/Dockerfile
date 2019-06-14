@@ -32,7 +32,7 @@ RUN \
     apt-get install -y libhdf5-dev && \
 
     # Python
-    apt-get install -y python-dev python-tk python-numpy python3-dev python3-tk python3-numpy && \
+    apt-get install -y python-dev python-tk python-numpy python3-dev python3-tk python3-numpy python3-pip python-pip && \
 
     # Java
     apt-get install -y ant default-jdk && \
