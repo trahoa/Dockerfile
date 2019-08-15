@@ -1,4 +1,4 @@
-# Tensorflow 2.0.0 with CUDA 10 and OpenCV 4.1.1
+# Tensorflow 1.14 with CUDA 10 and OpenCV 3.4.7
 
 ## Usage
 
@@ -11,11 +11,10 @@ docker run --runtime=nvidia -it --name nlp \
       --volume="/etc/shadow:/etc/shadow:ro" \
       --volume="/etc/sudoers.d:/etc/sudoers.d:ro" \
       --volume="/tmp/.X11-unix:/tmp/.X11-unix" \
-      -p 8888:8888 -p 6006:6006 \
+      -p 8889:8889 -p 6006:6006 \
        thtung1/tensorflow_noroot
 ```
 
 Inside docker, you can run jupyter with the following commands:
-> `export SHELL=/bin/bash`
 
-> `jupyter lab --ip=0.0.0.0 --no-browser`
+> `jupyter lab --ip=0.0.0.0 --no-browser --port=8889`
