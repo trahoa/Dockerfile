@@ -12,8 +12,8 @@ RUN \
     add-apt-repository 'deb http://security.ubuntu.com/ubuntu xenial-security main' && \
 
     # Uncomment if you want to build this image yourself
-    # TZ=Asia/Ho_Chi_Minh && \
-    # ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && \
+    TZ=Asia/Ho_Chi_Minh && \
+    ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && \
 
     # Update Ubuntu source files
     apt update && \
