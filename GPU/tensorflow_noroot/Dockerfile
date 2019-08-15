@@ -1,9 +1,9 @@
-FROM tensorflow/tensorflow:1.12.0-devel-gpu-py3
+FROM tensorflow/tensorflow:2.0.0b1-gpu-py3
 MAINTAINER TRAN Hoang Tung <tran-hoang.tung@usth.edu.vn>
 
 WORKDIR /home
 
-ENV OPENCV_VERSION='3.4.4'
+ENV OPENCV_VERSION='4.1.1'
 
 # Install dependencies
 RUN \
