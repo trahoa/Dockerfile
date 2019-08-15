@@ -1,53 +1,64 @@
-FROM tensorflow/tensorflow:2.0.0b1-gpu-py3
+FROM tensorflow/tensorflow:1.14.0-gpu-py3
 MAINTAINER TRAN Hoang Tung <tran-hoang.tung@usth.edu.vn>
 
 WORKDIR /home
 
-ENV OPENCV_VERSION='4.1.1'
+ENV OPENCV_VERSION='3.4.7'
 
 # Install dependencies
 RUN \
+    # just for the package libjasper-dev in Media I/O part
+    # echo 'deb http://us.archive.ubuntu.com/ubuntu/ yakkety universe' | tee -a /etc/apt/sources.list && \
+    add-apt-repository 'deb http://security.ubuntu.com/ubuntu xenial-security main' && \
+
+    # Uncomment if you want to build this image yourself
+    # TZ=Asia/Ho_Chi_Minh && \
+    # ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && \
+
     # Update Ubuntu source files
-    apt-get update && \
-    
+    apt update && \
+
     # You should never upgrade!!!
-    # apt-get upgrade -y && \
+    # apt upgrade -y && \
+
+    # disable silly asking questions during installation
+    # DEBIAN_FRONTEND=noninteractive && \
 
     # Build tools
-    apt-get install -y build-essential cmake curl && \
+    apt install -y build-essential cmake curl && \
 
     # GUI
-    apt-get install -y qt5-default libvtk6-dev && \
+    apt install -y qt5-default libvtk6-dev && \
 
     # Media I/O
-    apt-get install -y zlib1g-dev libjpeg-dev libwebp-dev libpng-dev libtiff5-dev libjasper-dev libopenexr-dev libgdal-dev && \
+    apt install -y zlib1g-dev libjpeg-dev libwebp-dev libpng-dev libtiff5-dev libjasper-dev libopenexr-dev libgdal-dev && \
 
     # Video I/O
-    apt-get install -y libdc1394-22-dev libavcodec-dev libavformat-dev libswscale-dev libtheora-dev libvorbis-dev libxvidcore-dev libx264-dev yasm libopencore-amrnb-dev libopencore-amrwb-dev libv4l-dev libxine2-dev && \
+    apt install -y libdc1394-22-dev libavcodec-dev libavformat-dev libswscale-dev libtheora-dev libvorbis-dev libxvidcore-dev libx264-dev yasm libopencore-amrnb-dev libopencore-amrwb-dev libv4l-dev libxine2-dev && \
 
     # Parallelism and linear algebra libraries
-    apt-get install -y libtbb-dev libeigen3-dev && \
+    apt install -y libtbb-dev libeigen3-dev && \
 
     # support to HDF5
-    apt-get install -y libhdf5-dev && \
+    apt install -y libhdf5-dev && \
 
     # Python
-    apt-get install -y python-dev python-tk python-numpy python3-dev python3-tk python3-numpy && \
+    apt install -y python-dev python-tk python-numpy python3-dev python3-tk python3-numpy && \
 
     # Java
-    apt-get install -y ant default-jdk && \
+    apt install -y ant default-jdk && \
 
     # Documentation:
-    apt-get install -y doxygen && \
+    apt install -y doxygen && \
 
     # sudo
-    apt-get install -y sudo && \
-    
+    apt install -y sudo && \
+
     # jupyterlab to manage python easily
     pip install jupyterlab && \
 
     # Cleanup
-    apt-get autoclean && apt-get clean && \
+    apt autoclean && apt clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Download OpenCV and install
@@ -74,3 +85,6 @@ RUN \
     make -j $(getconf _NPROCESSORS_ONLN) && \
     make install && \
     ldconfig
+
+# To use TAB to complete commands
+ENV SHELL=/bin/bash
