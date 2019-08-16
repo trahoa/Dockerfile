@@ -24,7 +24,7 @@ RUN \
     # apt upgrade -y && \
 
     # Build tools
-    apt install -y build-essential cmake curl && \
+    apt install -y build-essential cmake curl git && \
 
     # GUI
     apt install -y qt5-default libvtk6-dev && \
@@ -84,6 +84,12 @@ RUN \
     make -j $(getconf _NPROCESSORS_ONLN) && \
     make install && \
     ldconfig
+
+# Download and install Keras-tuner
+RUN \
+    git clone https://github.com/keras-team/keras-tuner.git && \
+    cd keras-tuner && \
+    pip install .
 
 # To use TAB to complete commands
 ENV SHELL=/bin/bash
