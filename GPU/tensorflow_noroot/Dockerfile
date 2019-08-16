@@ -55,7 +55,7 @@ RUN \
     apt install -y sudo && \
 
     # jupyterlab to manage python easily
-    pip install jupyterlab && \
+    pip install jupyterlab matplotlib && \
 
     # Cleanup
     apt autoclean && apt clean && \
