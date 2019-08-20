@@ -53,8 +53,14 @@ RUN \
     # sudo
     apt install -y sudo && \
 
+    # nodejs
+    apt install -y nodejs npm && \
+
     # jupyterlab to manage python easily
-    pip install jupyterlab matplotlib scipy && \
+    pip install jupyterlab matplotlib scipy ipywidgets && \
+    
+    # jupyter lab extenstion
+    jupyter labextension install @jupyter-widgets/jupyterlab-manager && \
 
     # Cleanup
     apt autoclean && apt clean && \
@@ -89,6 +95,7 @@ RUN \
 RUN \
     git clone https://github.com/keras-team/keras-tuner.git && \
     cd keras-tuner && \
+    sed -i 's/tensorflow/tensorflow-gpu/g' setup.py && \
     pip install .
 
 # To use TAB to complete commands
