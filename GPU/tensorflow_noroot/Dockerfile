@@ -57,10 +57,10 @@ RUN \
     apt install -y nodejs npm && \
 
     # jupyterlab to manage python easily
-    pip install jupyterlab matplotlib scipy ipywidgets && \
+    pip install jupyterlab==1.0.10 matplotlib scipy && \
     
-    # jupyter lab extenstion
-    jupyter labextension install @jupyter-widgets/jupyterlab-manager && \
+    # jupyter lab extenstion: ipywidgets
+    jupyter labextension install @jupyter-widgets/jupyterlab-manager@1.0 && \
 
     # Cleanup
     apt autoclean && apt clean && \
