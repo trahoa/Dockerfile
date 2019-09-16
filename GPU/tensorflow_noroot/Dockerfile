@@ -53,7 +53,11 @@ RUN \
     # sudo
     apt install -y sudo && \
 
-    # nodejs
+    # prepare for npm, to fix the error on 18.04: 
+    # npm : Depends: node-gyp (>= 0.10.9) but it is not going to be installed
+    apt install -y nodejs-dev node-gyp libssl1.0-dev && \
+
+    # install nodejs
     apt install -y nodejs npm && \
 
     # jupyterlab to manage python easily
