@@ -1,4 +1,4 @@
-FROM tensorflow/tensorflow:2.0.0rc0-gpu-py3
+FROM tensorflow/tensorflow:latest-devel-gpu-py3
 MAINTAINER TRAN Hoang Tung <tran-hoang.tung@usth.edu.vn>
 
 WORKDIR /home
@@ -57,10 +57,10 @@ RUN \
     apt install -y nodejs npm && \
 
     # jupyterlab to manage python easily
-    pip install jupyterlab==1.0.10 matplotlib scipy && \
+    pip install jupyterlab matplotlib scipy ipywidgets && \
     
     # jupyter lab extenstion: ipywidgets
-    jupyter labextension install @jupyter-widgets/jupyterlab-manager@1.0 && \
+    jupyter labextension install @jupyter-widgets/jupyterlab-manager && \
 
     # Cleanup
     apt autoclean && apt clean && \
