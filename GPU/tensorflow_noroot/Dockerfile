@@ -57,6 +57,9 @@ RUN \
     curl -sL https://deb.nodesource.com/setup_12.x | bash - && \
     apt install -y nodejs && \
     
+    # Jupyter lab
+    pip install jupyterlab matplotlib scipy jupyter_contrib_nbextensions yapf ipywidgets && \
+
     # Cleanup
     apt autoclean && apt clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
@@ -64,7 +67,6 @@ RUN \
 # Extensions for jupyterlab and notebook
 RUN \
     # for notebook localhost:8889/tree
-    pip install jupyterlab matplotlib scipy jupyter_contrib_nbextensions yapf && \
     jupyter contrib nbextension install --user && \
     jupyter nbextension enable hinterland/hinterland && \
     jupyter nbextension enable code_prettify/code_prettify && \
@@ -72,7 +74,6 @@ RUN \
 
     # For jupyterlab localhost:8889/lab
     # interactive HTML
-    pip install ipywidgets && \
     jupyter nbextension enable --py --sys-prefix widgetsnbextension && \
     jupyter labextension install @jupyter-widgets/jupyterlab-manager
 
