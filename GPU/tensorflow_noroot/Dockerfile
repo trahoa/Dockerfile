@@ -53,27 +53,32 @@ RUN \
     # sudo
     apt install -y sudo && \
 
-    # prepare for npm, to fix the error on 18.04: 
-    # npm : Depends: node-gyp (>= 0.10.9) but it is not going to be installed
-    # apt install -y nodejs-dev node-gyp libssl1.0-dev && \
-
-    # install nodejs
-    #apt install -y nodejs npm && \
-
     # try nodejs 12
     curl -sL https://deb.nodesource.com/setup_12.x | bash - && \
     apt install -y nodejs && \
     
-    # jupyterlab to manage python easily
-    pip install jupyterlab matplotlib scipy ipywidgets && \
-    
-    # jupyter lab extenstion: ipywidgets
-    jupyter labextension install @jupyter-widgets/jupyterlab-manager && \
-
     # Cleanup
     apt autoclean && apt clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+# Extensions for jupyterlab and notebook
+RUN \
+    # for notebook localhost:8889/tree
+    pip install jupyterlab matplotlib scipy jupyter_contrib_nbextensions yapf && \
+    jupyter contrib nbextension install --user && \
+    jupyter nbextension enable hinterland/hinterland && \
+    jupyter nbextension enable code_prettify/code_prettify && \
+    jupyter nbextension enable codefolding/main && \
+
+    # For jupyterlab localhost:8889/lab
+    # interactive HTML
+    pip install ipywidgets && \
+    jupyter nbextension enable --py --sys-prefix widgetsnbextension && \
+    jupyter labextension install @jupyter-widgets/jupyterlab-manager
+
+    # Go to definition (Ctrl + Alt + B keyboard-only)
+    jupyter labextension install @krassowski/jupyterlab_go_to_definition && \
+    
 # Download OpenCV and install
 RUN \
     # Download OpenCV and OpenCV-contrib
