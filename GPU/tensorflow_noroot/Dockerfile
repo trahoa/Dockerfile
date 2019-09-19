@@ -56,8 +56,13 @@ RUN \
     # try nodejs 12
     curl -sL https://deb.nodesource.com/setup_12.x | bash - && \
     apt install -y nodejs && \
-    
-    # Jupyter lab
+
+    # Cleanup
+    apt autoclean && apt clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# Jupyter lab
+RUN \
     pip install jupyterlab matplotlib scipy jupyter_contrib_nbextensions yapf ipywidgets && \
 
     # Extensions for jupyterlab and notebook
@@ -70,16 +75,11 @@ RUN \
     # For jupyterlab localhost:8889/lab
     # interactive HTML
     jupyter nbextension enable --py --sys-prefix widgetsnbextension && \
-    jupyter labextension install @jupyter-widgets/jupyterlab-manager
+    jupyter labextension install @jupyter-widgets/jupyterlab-manager && \
 
     # Go to definition (Ctrl + Alt + B keyboard-only)
-    jupyter labextension install @krassowski/jupyterlab_go_to_definition && \
+    jupyter labextension install @krassowski/jupyterlab_go_to_definition
 
-    # Cleanup
-    apt autoclean && apt clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-    
 # Download OpenCV and install
 RUN \
     # Download OpenCV and OpenCV-contrib
