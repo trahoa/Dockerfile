@@ -60,12 +60,7 @@ RUN \
     # Jupyter lab
     pip install jupyterlab matplotlib scipy jupyter_contrib_nbextensions yapf ipywidgets && \
 
-    # Cleanup
-    apt autoclean && apt clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-# Extensions for jupyterlab and notebook
-RUN \
+    # Extensions for jupyterlab and notebook
     # for notebook localhost:8889/tree
     jupyter contrib nbextension install --user && \
     jupyter nbextension enable hinterland/hinterland && \
@@ -79,6 +74,11 @@ RUN \
 
     # Go to definition (Ctrl + Alt + B keyboard-only)
     jupyter labextension install @krassowski/jupyterlab_go_to_definition && \
+
+    # Cleanup
+    apt autoclean && apt clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
     
 # Download OpenCV and install
 RUN \
