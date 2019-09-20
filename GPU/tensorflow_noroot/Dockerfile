@@ -69,8 +69,6 @@ RUN \
     # for notebook localhost:8889/tree
     jupyter contrib nbextension install && \
     jupyter nbextension enable hinterland/hinterland && \
-    jupyter nbextension enable code_prettify/code_prettify && \
-    jupyter nbextension enable codefolding/main && \
 
     # For jupyterlab localhost:8889/lab
     # interactive HTML
@@ -78,8 +76,8 @@ RUN \
     jupyter labextension install @jupyter-widgets/jupyterlab-manager && \
 
     #jupyter matplotlib: add this to the notebook: %matplotlib widget
-    jupyter labextension install @jupyter-widgets/jupyterlab-manager
-    jupyter labextension install jupyter-matplotlib
+    jupyter labextension install @jupyter-widgets/jupyterlab-manager && \
+    jupyter labextension install jupyter-matplotlib && \
     
     # Go to definition (Ctrl + Alt + B keyboard-only)
     jupyter labextension install @krassowski/jupyterlab_go_to_definition
