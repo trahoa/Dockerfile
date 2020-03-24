@@ -3,7 +3,7 @@ MAINTAINER TRAN Hoang Tung <tran-hoang.tung@usth.edu.vn>
 
 WORKDIR /home
 
-ENV OPENCV_VERSION='3.4.1'
+ENV OPENCV_VERSION='4.2.0'
 
 # Install dependencies
 RUN \
@@ -17,7 +17,7 @@ RUN \
     apt-get install -y build-essential cmake curl && \
 
     # GUI
-    apt-get install -y qt5-default libvtk6-dev && \
+    # apt-get install -y qt5-default libvtk6-dev && \
 
     # Media I/O
     apt-get install -y zlib1g-dev libjpeg-dev libwebp-dev libpng-dev libtiff5-dev libjasper-dev libopenexr-dev libgdal-dev && \
@@ -32,16 +32,16 @@ RUN \
     apt-get install -y libhdf5-dev && \
 
     # Python
-    apt-get install -y python-dev python-tk python-numpy python3-dev python3-tk python3-numpy python3-pip python-pip && \
+    apt-get install -y python3-dev python3-tk python3-numpy python3-pip && \
 
     # Java
     apt-get install -y ant default-jdk && \
 
     # Documentation:
-    apt-get install -y doxygen && \
+    # apt-get install -y doxygen && \
 
     # sudo
-    apt-get install -y sudo && \
+    # apt-get install -y sudo && \
 
     # Cleanup
     apt-get autoclean && apt-get clean && \
@@ -68,6 +68,7 @@ RUN \
     -D ENABLE_PRECOMPILED_HEADERS=OFF \
     -D BUILD_PERF_TESTS=OFF \
     -D BUILD_TESTS=OFF \
+    -D OPENCV_ENABLE_NONFREE=ON \
     -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules/ .. && \
     make -j $(getconf _NPROCESSORS_ONLN) && \
     make install && \
