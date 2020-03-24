@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM python:3.7.7-buster
 MAINTAINER TRAN Hoang Tung <tran-hoang.tung@usth.edu.vn>
 
 WORKDIR /home
@@ -23,19 +23,19 @@ RUN \
     apt-get install -y zlib1g-dev libjpeg-dev libwebp-dev libpng-dev libtiff5-dev libjasper-dev libopenexr-dev libgdal-dev && \
 
     # Video I/O
-    apt-get install -y libdc1394-22-dev libavcodec-dev libavformat-dev libswscale-dev libtheora-dev libvorbis-dev libxvidcore-dev libx264-dev yasm libopencore-amrnb-dev libopencore-amrwb-dev libv4l-dev libxine2-dev && \
+    # apt-get install -y libdc1394-22-dev libavcodec-dev libavformat-dev libswscale-dev libtheora-dev libvorbis-dev libxvidcore-dev libx264-dev yasm libopencore-amrnb-dev libopencore-amrwb-dev libv4l-dev libxine2-dev && \
 
     # Parallelism and linear algebra libraries
     apt-get install -y libtbb-dev libeigen3-dev && \
 
     # support to HDF5
-    apt-get install -y libhdf5-dev && \
+    # apt-get install -y libhdf5-dev && \
 
     # Python
-    apt-get install -y python3-dev python3-tk python3-numpy python3-pip && \
+    apt-get install -y python3-dev python3-numpy && \
 
     # Java
-    apt-get install -y ant default-jdk && \
+    # apt-get install -y ant default-jdk && \
 
     # Documentation:
     # apt-get install -y doxygen && \
@@ -57,7 +57,7 @@ RUN \
     cd opencv/build && \
     cmake -D CMAKE_BUILD_TYPE=RELEASE \
     -D ENABLE_CXX11=ON -D WITH_INF_ENGINE=ON \
-    -D WITH_QT=ON \
+    -D WITH_QT=OFF \
     -D WITH_CUDA=OFF \
     -D WITH_OPENGL=ON \
     -D FORCE_VTK=ON \
@@ -69,7 +69,11 @@ RUN \
     -D BUILD_PERF_TESTS=OFF \
     -D BUILD_TESTS=OFF \
     -D OPENCV_ENABLE_NONFREE=ON \
+    -D OPENCV_PYTHON3_VERSION=ON \
     -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules/ .. && \
     make -j $(getconf _NPROCESSORS_ONLN) && \
     make install && \
-    ldconfig
+    ldconfig && \
+    cd ../.. && \
+    rm -rf opencv && \
+    rm -rf opencv_contrib
