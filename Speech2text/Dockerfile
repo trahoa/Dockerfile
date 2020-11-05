@@ -44,6 +44,12 @@ RUN git clone https://github.com/facebookincubator/gloo && \
     apt-get install -y openmpi-bin openmpi-common libopenmpi-dev && \
     cmake .. -DUSE_MPI=ON && make -j$(nproc) && make install
 
+# MKL
+RUN wget https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS-2019.PUB && \
+    apt-key add GPG-PUB-KEY-INTEL-SW-PRODUCTS-2019.PUB && \
+    sh -c 'echo deb https://apt.repos.intel.com/mkl all main > /etc/apt/sources.list.d/intel-mkl.list' && \
+    apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends cpio intel-mkl-64bit-2018.4-057
+
 # MKL_DNN
 RUN git clone https://github.com/intel/mkl-dnn.git -b mnt-v0 && \
     cd mkl-dnn && mkdir -p build && cd build && \
@@ -71,7 +77,7 @@ ENV KENLM_ROOT_DIR=/root/kenlm
 RUN apt-get install -y libhdf5-dev && \
     git clone https://github.com/mailong25/wav2letter.git && \
     cd wav2letter && \
-    sed -i 's+(1.0 / fl::getWorldSize())+(1.0 / fl::getWorldSize(),true,true)+g' Train.cpp && \
+    sed -i 's+<fl::InlineReducer>(1.0 / fl::getWorldSize())+<fl::CoalescingReducer>(1.0 / fl::getWorldSize(),true,true)+g' Train.cpp && \
     mkdir -p build && cd build && \
     cmake .. -DCMAKE_BUILD_TYPE=Release -DKENLM_MAX_ORDER=20 -DW2L_LIBRARIES_USE_CUDA=ON && \
     make -j$(nproc)
