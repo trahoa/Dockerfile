@@ -11,8 +11,8 @@ RUN apt-get update && \
     apt-get update && \
     apt-get install -y libboost-all-dev && \
     apt-get install -y build-essential git cmake libfreeimage-dev cmake-curses-gui && \
-    apt-get remove --purge cmake && \
-    apt-get install -y build-essential libssl-dev sudo && \
+    apt-get remove --purge -y cmake && \
+    apt-get install -y build-essential libssl-dev sudo wget && \
     wget https://cmake.org/files/v3.16/cmake-3.16.5.tar.gz && \
     tar -zxvf cmake-3.16.5.tar.gz && \
     rm cmake-3.16.5.tar.gz && \
@@ -23,15 +23,16 @@ RUN apt-get update && \
     cp -r boost_1_70_0/boost /usr/local/include && \
     apt-get install -y openmpi-bin openmpi-common libopenmpi-dev && \
     ln -s /usr/lib/x86_64-linux-gnu/libcublas.so.10.2.1.243 /usr/local/cuda/lib64/libcublas.so && \
-    ln -s /usr/lib/x86_64-linux-gnu/libcublsas.so.10.2.1.243 /usr/local/cuda/lib64/libcublas.so.10 && \
+    ln -s /usr/lib/x86_64-linux-gnu/libcublas.so.10.2.1.243 /usr/local/cuda/lib64/libcublas.so.10 && \
     ln -s /usr/lib/x86_64-linux-gnu/libcublasLt.so.10.2.1.243 /usr/local/cuda/lib64/libcublasLt.so && \
     ln -s /usr/lib/x86_64-linux-gnu/libcublasLt.so.10.2.1.243 /usr/local/cuda/lib64/libcublasLt.so.10 && \
-    ln -s /usr/local/cuda/lib64/stubs/libcuda.so /usr/lib/x86_64-linux-gnu/libcuda.so.1
+    ln -s /usr/local/cuda/lib64/stubs/libcuda.so /usr/lib/x86_64-linux-gnu/libcuda.so.1 && \
+    apt-get autoremove -y
 
 # arrayfire
 RUN git clone --recursive https://github.com/arrayfire/arrayfire.git --branch v3.6.4 && \
-    apt-get install -y libglfw3-dev libgl1-mesa-dev libglu1-mesa-dev 
-RUN apt-get install -y libopenblas-dev libfftw3-dev liblapacke-dev libatlas-base-dev  && \
+    apt-get install -y libglfw3-dev libgl1-mesa-dev libglu1-mesa-dev
+RUN apt-get install -y libopenblas-dev libfftw3-dev liblapacke-dev libatlas-base-dev && \
     cd arrayfire && mkdir build && cd build && \
     cmake .. -DCMAKE_BUILD_TYPE=Release -DAF_BUILD_CUDA=ON && \
     make -j$(nproc) && make install
@@ -67,7 +68,7 @@ RUN apt-get install -y libsndfile-dev libopenblas-dev libfftw3-dev libgflags-dev
 ENV KENLM_ROOT_DIR=/root/kenlm
 
 # wav2letter from mailong
-RUN apt-get install libhdf5-dev && \
+RUN apt-get install -y libhdf5-dev && \
     git clone https://github.com/mailong25/wav2letter.git && \
     cd wav2letter && \
     sed -i 's+(1.0 / fl::getWorldSize())+(1.0 / fl::getWorldSize(),true,true)+g' Train.cpp && \
